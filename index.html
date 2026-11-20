@@ -179,40 +179,119 @@ code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.07);pad
 .avcell em{font-style:normal;color:var(--ink2);font-family:var(--mono);font-size:11.5px;word-break:break-all;display:block}
 .avacts{display:flex;gap:8px;flex-wrap:wrap}
 .avacts .btn.mini{padding:7px 12px}
+
+/* ===== 云端账号系统 ===== */
+.ver-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;color:#fff;background:linear-gradient(135deg,#4a90e2,#7ab4f0);padding:2px 7px;border-radius:6px;vertical-align:middle;margin-left:8px;box-shadow:0 2px 8px -3px #4a90e2}
+.account-area{display:inline-flex;align-items:center;gap:8px}
+.acc-name{font-size:12px;color:var(--ink2);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.auth-overlay{position:fixed;inset:0;z-index:400;background:radial-gradient(1200px 700px at 50% 0%,#23304a 0%,#14161b 60%);display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-card{position:relative;width:100%;max-width:420px;background:linear-gradient(160deg,#242832,#1c1f27);border:1px solid var(--line);border-radius:18px;padding:30px 28px;box-shadow:0 24px 70px -20px rgba(0,0,0,.7)}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.auth-logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#4a90e2,#7ab4f0);color:#fff;font-weight:700;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px -6px #4a90e2}
+.auth-title{margin:14px 0 4px;font-size:21px;font-weight:700}
+.auth-sub{margin:0 0 22px;color:var(--ink3);font-size:13px;line-height:1.6}
+.auth-card label{display:block;font-size:12px;color:var(--ink2);margin:0 0 6px}
+.auth-card input{width:100%;background:#151821;border:1px solid var(--line);color:var(--ink);padding:11px 13px;border-radius:10px;font-size:14px;margin-bottom:15px;outline:none;transition:.16s}
+.auth-card input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(74,144,226,.15)}
+.auth-card .btn.primary{width:100%;padding:12px;font-size:14px;justify-content:center}
+.auth-switch{margin-top:18px;text-align:center;color:var(--ink3);font-size:12.5px}
+.auth-switch a{color:var(--accent2);font-weight:600;cursor:pointer}
+.auth-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line-soft);font-size:11.5px;color:var(--ink3);line-height:1.6}
+.auth-cloudlink{display:inline-flex;align-items:center;gap:5px;color:var(--accent2);cursor:pointer;font-weight:600}
+.cloud-field label{display:block;font-size:12px;color:var(--ink2);margin:0 0 6px}
+.cloud-field input{width:100%;background:#151821;border:1px solid var(--line);color:var(--ink);padding:11px 13px;border-radius:10px;font-size:13px;outline:none;font-family:var(--mono)}
+.cloud-field input:focus{border-color:var(--accent)}
+.cloud-mode-pill{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(74,144,226,.14);color:var(--accent2);border:1px solid rgba(74,144,226,.3);margin-bottom:12px}
+@media(max-width:720px){.acc-name{max-width:90px}}
+
 </style>
 
 <style id="gml-responsive">
-/* __GML_RESPONSIVE_LOCAL_V1__ */
+/* __GML_RESPONSIVE_V1__ */
+/* ---------- 手机端适配 ---------- */
+/* 用动态视口高度：移动端浏览器地址栏不会遮挡打卡页底部 */
 @supports(height:100dvh){ #view-project{height:100dvh} }
+
 @media(max-width:720px){
-  /* 打卡页顶栏改两行，避免保存/语言切换被挤出屏幕 */
+  /* 打卡页顶栏：改成两行，避免「立即保存 / 上传存档」被挤出屏幕 */
   #view-project .project-bar{
     height:auto;min-height:56px;flex:0 0 auto;
     flex-wrap:wrap;row-gap:8px;column-gap:8px;padding:8px 10px;
   }
   #view-project .project-bar .pname{max-width:none;flex:0 1 auto;min-width:0;font-size:14px}
+  /* spacer 独占一行，把语言切换/保存/上传挤到第二行 */
   #view-project .project-bar .spacer{flex-basis:100%;height:0;margin:0}
   #view-project .project-bar .pstatus{font-size:11px}
   #view-project .project-bar .btn{padding:7px 10px;font-size:12px}
   #view-project .project-bar .lang-sw button{padding:6px 10px}
+
   /* 管理页顶栏更紧凑 */
   .topbar-in{padding:12px 14px;gap:10px}
   .brand-txt h1{font-size:15px}
   .top-actions{gap:7px}
   .top-actions .btn{padding:7px 10px;font-size:12px}
+  .acc-name{max-width:100px}
+
+  /* 内容区与卡片统计收紧 */
   .wrap{padding:14px}
-  .stats{gap:6px} .stat b{font-size:16px}
+  .stats{gap:6px}
+  .stat b{font-size:16px}
+
+  /* 弹层左右留白收紧 */
   .sheet-head,.sheet-body,.sheet-foot{padding-left:14px;padding-right:14px}
-  .modal,.setup-card{padding:20px}
+  .modal,.setup-card,.auth-card{padding:20px}
 }
+
 @media(max-width:380px){
   #view-project .project-bar .pstatus #statusText{font-size:10.5px}
+  .auth-card{padding:18px 16px}
   .account-area{gap:6px}
 }
 </style>
 
 </head>
 <body>
+
+<!-- ============ 云端账号：登录 / 注册 ============ -->
+<div class="auth-overlay" id="authOverlay" hidden>
+  <div class="auth-card">
+    <div class="auth-brand"><div class="auth-logo">G</div><div><div style="font-size:11px;color:var(--ink3)">GML PRACTICE LOG</div><div style="font-size:13px;font-weight:600"><span data-i18n="云端存档管理器">云端存档管理器</span> <span class="ver-badge">v1</span></div></div></div>
+    <div class="lang-sw" data-lang-switch style="position:absolute;top:26px;right:26px"><button type="button" data-lang-set="zh" class="on">中文</button><button type="button" data-lang-set="en">EN</button></div>
+    <h2 class="auth-title" id="authTitle" data-i18n="登录到云端">登录到云端</h2>
+    <p class="auth-sub" id="authSub" data-i18n="一个账号，项目自动存到腾讯云，换设备也能取回。">一个账号，项目自动存到腾讯云，换设备也能取回。</p>
+    <form id="authForm" autocomplete="on">
+      <label for="authUser" data-i18n="用户名">用户名</label>
+      <input id="authUser" type="text" autocomplete="username" spellcheck="false" placeholder="请输入用户名">
+      <label for="authPass" data-i18n="密码">密码</label>
+      <input id="authPass" type="password" autocomplete="current-password" placeholder="请输入密码（至少 4 位）">
+      <button class="btn primary" id="authSubmit" type="submit" data-i18n="登录">登录</button>
+    </form>
+    <div class="auth-switch" id="authSwitch"></div>
+    <div class="auth-foot">
+      <span class="auth-cloudlink" id="authCloudLink" data-i18n="⚙ 云存储设置">⚙ 云存储设置</span><br>
+      <span data-i18n-html="auth_foot_note">已连接<b>腾讯云</b>：用用户名和密码登录后，项目自动存入云端，换设备也能取回。无需邮箱或手机号。</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 云存储设置弹层 ============ -->
+<div class="overlay" id="cloudOverlay" hidden>
+  <div class="modal">
+    <h3>云存储设置</h3>
+    <span class="cloud-mode-pill" id="cloudMode">演示模式</span>
+    <div class="cloud-field">
+      <label for="cloudEnv">环境 ID（腾讯云 CloudBase）</label>
+      <input id="cloudEnv" type="text" spellcheck="false" placeholder="例如 gml-manager-1gxxxxxx">
+    </div>
+    <p id="cloudNote" style="color:var(--ink3);font-size:12px;line-height:1.6;margin:0 0 6px"></p>
+    <div class="modal-actions">
+      <button class="btn" id="cloudClear">清空</button>
+      <button class="btn" id="cloudCancel">取消</button>
+      <button class="btn primary" id="cloudOk">保存设置</button>
+    </div>
+  </div>
+</div>
+
 <!-- ======== 首次运行：选择保存位置 ======== -->
 <div class="overlay" id="setupOverlay" hidden>
   <div class="setup-card">
@@ -252,10 +331,11 @@ code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.07);pad
     <div class="topbar-in">
       <div class="logo">G</div>
       <div class="brand-txt">
-        <h1 data-i18n="GML 练习记录 · 项目存档管理器">GML 练习记录 · 项目存档管理器</h1>
+        <h1 data-i18n="GML 练习记录 · 项目存档管理器">GML 练习记录 · 项目存档管理器<span class="ver-badge">v1</span></h1>
         <p data-i18n="一个网页，多个互不干扰的项目文件；网页的每次自动保存都由这里接管">一个网页，多个互不干扰的项目文件；网页的每次自动保存都由这里接管</p>
       </div>
       <div class="top-actions">
+        <span class="account-area" id="accountArea"></span>
         <div class="lang-sw" data-lang-switch><button type="button" data-lang-set="zh" class="on">中文</button><button type="button" data-lang-set="en">EN</button></div>
         <button class="chip" id="fsChip" title="查看 / 更换保存位置" data-i18n-title="查看 / 更换保存位置"><i></i><span id="fsChipText">检查保存位置…</span></button>
         <button class="btn" id="btnTrash"><span data-i18n="🗑 回收站">🗑 回收站</span> <span id="trashCount">0</span></button>
@@ -8084,6 +8164,1104 @@ $('#appSrcOk').addEventListener('click', async function(){
   renderAppCard();
   await fetchLatestApp();
 });
+/* __CLOUD_ACCOUNT_V1__ */
+/* =========================================================================
+   GML 云端账号系统（v1）
+   - 账号：自建账号表（用户名 + 加盐哈希密码），与打卡网页无关。
+   - 存档：每个账号一份 vault 文档，包含 saves / trash / 语言 / 网页缓存。
+   - 双驱动：tencent（真实腾讯云 CloudBase）与 demo（本地模拟云，未配置环境时用）。
+   - 本模块在 boot() 调用前注入，重新声明同名函数以覆盖文件夹存储边界。
+   ========================================================================= */
+
+/* ---------- 云端文案（覆盖/扩充双语字典） ---------- */
+(function(){
+  var Z = {
+    'GML 练习记录 · 项目存档管理器': 'GML 练习记录 · 云端存档',
+    '一个网页，多个互不干扰的项目文件；网页的每次自动保存都由这里接管': '一个账号，多个互不干扰的项目；自动保存留本地草稿，上传/下载在云端同步',
+    'intro_1': '<b>本地草稿 + 手动云同步：</b>打卡的自动保存先留在浏览器草稿；点「上传存档」把存档和回收站传到云端，换设备点「下载存档」取回。',
+    'intro_2': '<b>默认是空的：</b>新账号没有任何项目，新建一个即可开始。',
+    'intro_3': '<b>手动存档：</b>打卡页的自动保存只留在本地草稿；点「上传存档」只把存档与回收站上传云端，点「下载存档」取回这两个文件。',
+    'foot_note': '删除不会立刻抹掉数据：项目会移入云端回收站，可随时恢复。',
+    'fsloc_saved': '<b>云存储</b>　腾讯云 CloudBase · 账号 <b>{name}</b><br><b>数据位置</b>　集合 {vaults} 中属于本账号的文档（saves / trash / 设置）<br><b>浏览器只存</b>　当前登录会话与环境 ID，不存任何项目数据',
+    'fsloc_unsaved': '<b>云存储</b>　尚未登录；登录或注册后即可使用云端存档',
+    'sb_scanned': '<div class="sb-main">☁ 已连接云端账号 <b>{name}</b>：共 <b>{total}</b> 个项目 · 最后同步 <b>{time}</b></div><div class="sb-actions"><button class="btn mini" id="btnCloudSync">🔄 立即同步</button></div>',
+    'sb_empty': '<div class="sb-main">☁ 当前账号还没有项目。<b>新建一个项目</b>即可开始；也可点「下载存档」从云端取回。{unsupported}</div>{action}',
+    '文件夹里还没有存档文件': '这个账号还没有项目',
+    '默认就是空项目：新建一个空白项目，或把存档 <code>.json</code> 放进文件夹后点「重新扫描」。': '新账号默认是空的：点「＋ 新建项目」即可开始。',
+    '尚未选择存档文件夹': '尚未登录云端账号',
+    '仅第一次需要选择文件夹，之后打开会自动查找并恢复。项目数据只保存在文件夹里。': '登录或注册一个账号，项目数据会保存在你的腾讯云空间。',
+    '查看 / 更换保存位置': '云端账号与存储设置',
+    '· {n} 个存档文件 · 数据只存在文件夹里': '· {n} 个项目 · 存于云端',
+    '· 未连接文件夹': '· 未登录',
+    '· 已找到上次的文件夹，等待恢复': '· 正在连接云端…',
+    '导出全部': '导出全部',
+    '导入存档': '导入项目',
+    '🗑 回收站': '🗑 回收站',
+    '账号': '账号',
+    '密码': '密码',
+    '登录': '登录',
+    '注册': '注册',
+    '退出登录': '退出登录',
+    '云存储设置': '云存储设置',
+    '登录到云端': '登录到云端',
+    '注册新账号': '注册新账号',
+    '还没有账号？注册': '还没有账号？注册',
+    '已有账号？登录': '已有账号？登录',
+    '用户名': '用户名',
+    '请输入用户名': '请输入用户名',
+    '请输入密码（至少 4 位）': '请输入密码（至少 4 位）',
+    '请输入密码（至少 8 位）': '请输入密码（至少 4 位）',
+    '密码至少 8 位且包含字母和数字': '密码至少 4 位',
+    '邮箱': '用户名',
+    '请输入邮箱': '请输入用户名',
+    '请输入有效的邮箱地址': '请输入有效的用户名',
+    '用户名只能包含字母、数字、下划线和短横线': '用户名只能包含字母、数字、下划线和短横线（2-32 位）',
+    '用户名只能包含字母、数字、下划线和短横线（2-32 位）': '用户名只能包含字母、数字、下划线和短横线（2-32 位）',
+    '用户名已存在': '用户名已存在',
+    '用户名已存在，请直接登录': '用户名已存在，请直接登录',
+    '密码至少 4 位': '密码至少 4 位',
+    '账号或密码错误': '账号或密码错误',
+    '账号已登录': '账号已登录',
+    '请先登录云端账号': '请先登录云端账号',
+    '登录成功': '登录成功',
+    '注册成功': '注册成功',
+    '已退出登录': '已退出登录',
+    '保存到云端失败：{err}': '保存到云端失败：{err}',
+    '从云端加载失败：{err}': '从云端加载失败：{err}',
+    '已同步到云端 · {t}': '已同步到云端 · {t}',
+    '当前为演示模式：数据仅保存在本浏览器，填入云环境 ID 后即可切换到腾讯云': '当前为演示模式：数据仅保存在本浏览器，填入云环境 ID 后即可切换到腾讯云',
+    '腾讯云模式': '腾讯云模式',
+    '演示模式': '演示模式',
+    '环境 ID': '环境 ID',
+    '保存设置': '保存设置',
+    '连接到腾讯云': '连接到腾讯云',
+    '连接成功': '连接成功',
+    '连接失败：{err}': '连接失败：{err}',
+    '环境 ID 已内置。首次使用请在腾讯云控制台放行当前网站域名，并创建集合 gml_accounts 与 gml_vaults。': '环境 ID 已内置。首次使用请在腾讯云控制台放行当前网站域名，并创建集合 gml_accounts 与 gml_vaults。',
+    '清空环境 ID 可回到演示模式': '清空环境 ID 可回到演示模式',
+    '验证中…': '验证中…',
+    '账号 {name}': '账号 {name}',
+    '演示': '演示',
+    '云端': '云端',
+    '网页缓存已存到云端账号空间': '网页缓存已存到云端账号空间',
+    '环境 ID 与访问密钥已内置。请确保控制台已放行当前域名，并创建集合 gml_accounts 与 gml_vaults。': '环境 ID 与访问密钥已内置。请确保控制台已放行当前域名，并创建集合 gml_accounts 与 gml_vaults。',
+    'auth_foot_note': '已连接<b>腾讯云</b>：用用户名和密码登录；项目先存本地草稿，点「上传存档」写入云端，换设备点「下载存档」取回。无需邮箱或手机号。',
+    'app_intro': '<b>管理页是独立的程序，打卡网页可单独更新版本。</b>抓取的最新网页会存到你的云端账号空间，换设备登录同一账号即可沿用。',
+    'auth_sub': '一个账号，项目存本地草稿；上传后可在任意设备下载取回。',
+    '注册后项目自动存到你的腾讯云空间，换设备也能取回。': '注册后项目先存本地草稿；点上传写入云端，换设备下载取回。',
+    '上传存档': '⬆ 上传存档', '下载存档': '⬇ 下载存档',
+    '有未上传的更改': '● 有未上传的更改',
+    '已同步 · {t}': '已同步 · {t}',
+    '本地 {n} 个项目': '本地 {n} 个项目',
+    '本地还没有项目，可新建或从云端下载存档': '本地还没有项目，可新建或从云端下载存档',
+    '已上传到云端 · {t}': '已上传存档与回收站到云端 · {t}',
+    '已从云端下载 · {t}': '已从云端下载存档与回收站 · {t}',
+    '上传到云端失败：{err}': '上传到云端失败：{err}',
+    '从云端下载失败：{err}': '从云端下载失败：{err}',
+    '云端还没有存档，请先上传': '云端还没有存档，请先上传',
+    '先保存打卡数据…': '先保存打卡数据…',
+    '保存并上传成功': '打卡数据已保存并上传到云端',
+    '拉取最新版': '⬇ 拉取最新版',
+    'app_pulled_ok': '已拉取最新版打卡页，下次打开项目即生效（网页版本只存本地）',
+    'kicked_title': '账号已在其他设备登录',
+    'kicked_body': '为保护存档不被多端覆盖，本设备已被退出。你的本地草稿仍保留，重新登录后可选择「下载存档」取回云端最新数据。',
+    'kicked_confirm': '知道了，去登录',
+    'checking_session': '正在校验登录状态…'
+  };
+  var E = {
+    'GML 练习记录 · 项目存档管理器': 'GML Practice Log · Cloud',
+    '一个网页，多个互不干扰的项目文件；网页的每次自动保存都由这里接管': 'One account, multiple isolated projects; auto-saves stay in a local draft, sync via Upload/Download',
+    'intro_1': '<b>Local draft + manual cloud sync:</b> auto-saves stay in the browser draft; click Upload to push saves & trash to the cloud, Download on another device to restore.',
+    'intro_2': '<b>Empty by default:</b> a new account has no projects — create one to begin.',
+    'intro_3': '<b>Manual saves:</b> auto-saves stay in a local draft; Upload pushes only the saves & trash files to the cloud, Download pulls them back.',
+    'foot_note': 'Deleting does not erase right away: projects move to the cloud Trash and can be restored any time.',
+    'fsloc_saved': '<b>Cloud storage</b>&nbsp;&nbsp;Tencent CloudBase · account <b>{name}</b><br><b>Data location</b>&nbsp;&nbsp;your account document in collection {vaults} (saves / trash / settings)<br><b>Browser stores only</b>&nbsp;&nbsp;the login session and environment ID — never any project data',
+    'fsloc_unsaved': '<b>Cloud storage</b>&nbsp;&nbsp;Not signed in; sign in or register to use cloud saves',
+    'sb_scanned': '<div class="sb-main">☁ Connected to cloud account <b>{name}</b>: <b>{total}</b> project(s) · last sync <b>{time}</b></div><div class="sb-actions"><button class="btn mini" id="btnCloudSync">🔄 Sync now</button></div>',
+    'sb_empty': '<div class="sb-main">☁ No projects in this account yet. <b>Create one</b> to get started — data is saved to the cloud automatically.{unsupported}</div>{action}',
+    '文件夹里还没有存档文件': 'No projects in this account yet',
+    '默认就是空项目：新建一个空白项目，或把存档 <code>.json</code> 放进文件夹后点「重新扫描」。': 'New accounts start empty: click "＋ New project" to begin.',
+    '尚未选择存档文件夹': 'Not signed in to cloud',
+    '仅第一次需要选择文件夹，之后打开会自动查找并恢复。项目数据只保存在文件夹里。': 'Sign in or register an account; project data is stored in your Tencent Cloud space.',
+    '查看 / 更换保存位置': 'Cloud account & storage settings',
+    '· {n} 个存档文件 · 数据只存在文件夹里': '· {n} project{s} · stored in the cloud',
+    '· 未连接文件夹': '· Not signed in',
+    '· 已找到上次的文件夹，等待恢复': '· Connecting to cloud…',
+    '账号': 'Account',
+    '密码': 'Password',
+    '登录': 'Sign in',
+    '注册': 'Sign up',
+    '退出登录': 'Sign out',
+    '云存储设置': 'Cloud storage settings',
+    '登录到云端': 'Sign in to cloud',
+    '注册新账号': 'Create a cloud account',
+    '还没有账号？注册': 'No account? Sign up',
+    '已有账号？登录': 'Have an account? Sign in',
+    '用户名': 'Username',
+    '请输入用户名': 'Enter a username',
+    '请输入密码（至少 4 位）': 'Enter a password (4+ characters)',
+    '请输入密码（至少 8 位）': 'Enter a password (4+ characters)',
+    '密码至少 8 位且包含字母和数字': 'Password must be at least 4 characters',
+    '密码至少 4 位': 'Password must be at least 4 characters',
+    '邮箱': 'Username',
+    '请输入邮箱': 'Enter a username',
+    '请输入有效的邮箱地址': 'Enter a valid username',
+    '用户名只能包含字母、数字、下划线和短横线': 'Username may contain letters, digits, _ and - only (2-32 chars)',
+    '用户名只能包含字母、数字、下划线和短横线（2-32 位）': 'Username may contain letters, digits, _ and - only (2-32 chars)',
+    '用户名已存在': 'Username already exists',
+    '用户名已存在，请直接登录': 'Username already exists, please sign in',
+    '账号或密码错误': 'Wrong username or password',
+    '账号已登录': 'Already signed in',
+    '请先登录云端账号': 'Please sign in to your cloud account first',
+    '登录成功': 'Signed in',
+    '注册成功': 'Account created',
+    '已退出登录': 'Signed out',
+    '保存到云端失败：{err}': 'Cloud save failed: {err}',
+    '从云端加载失败：{err}': 'Cloud load failed: {err}',
+    '已同步到云端 · {t}': 'Synced to cloud · {t}',
+    '当前为演示模式：数据仅保存在本浏览器，填入云环境 ID 后即可切换到腾讯云': 'Demo mode: data is stored only in this browser. Enter a cloud environment ID to switch to Tencent Cloud.',
+    '腾讯云模式': 'Tencent Cloud mode',
+    '演示模式': 'Demo mode',
+    '环境 ID': 'Environment ID',
+    '保存设置': 'Save settings',
+    '连接到腾讯云': 'Connect to Tencent Cloud',
+    '连接成功': 'Connected',
+    '连接失败：{err}': 'Connection failed: {err}',
+    '环境 ID 已内置。首次使用请在腾讯云控制台放行当前网站域名，并创建集合 gml_accounts 与 gml_vaults。': 'Environment ID is built in. On first use, allow this website domain in the Tencent Cloud console, and create the gml_accounts and gml_vaults collections.',
+    '清空环境 ID 可回到演示模式': 'Clear the environment ID to return to demo mode',
+    '验证中…': 'Verifying…',
+    '账号 {name}': 'Account {name}',
+    '云端存档管理器': 'Cloud Save Manager',
+    '演示': 'Demo',
+    '云端': 'Cloud',
+    '网页缓存已存到云端账号空间': 'Page cache saved to your cloud account space',
+    '环境 ID 与访问密钥已内置。请确保控制台已放行当前域名，并创建集合 gml_accounts 与 gml_vaults。': 'Environment ID and access key are built in. Allow this website domain in the console, and create the gml_accounts and gml_vaults collections.',
+    'auth_foot_note': 'Connected to <b>Tencent Cloud</b>: sign in with a username and password. Projects stay in a local draft; click Upload to save to the cloud, then Download on another device to restore. No email or phone required.',
+    '一个账号，项目自动存到腾讯云，换设备也能取回。': 'One account — projects stay in a local draft; upload to the cloud, then download on any device.',
+    '⚙ 云存储设置': '⚙ Cloud storage settings',
+    '· {n} 个项目 · 存于云端': '· {n} project{s} · stored in the cloud',
+    'app_intro': '<b>The manager is a standalone program; the check-in page can be updated on its own.</b> A fetched page is saved to your cloud account space and reused when you sign in on another device.',
+    'auth_sub': 'One account — projects stay in a local draft; upload to the cloud, then download on any device.',
+    '注册后项目自动存到你的腾讯云空间，换设备也能取回。': 'After sign-up, projects stay in a local draft; upload to the cloud, then download on another device.',
+    '上传存档': '⬆ Upload', '下载存档': '⬇ Download',
+    '有未上传的更改': '● Unuploaded changes',
+    '已同步 · {t}': 'Synced · {t}',
+    '本地 {n} 个项目': '{n} local project(s)',
+    '本地还没有项目，可新建或从云端下载存档': 'No local projects yet — create one or download from the cloud',
+    '已上传到云端 · {t}': 'Uploaded saves & trash to cloud · {t}',
+    '已从云端下载 · {t}': 'Downloaded saves & trash from cloud · {t}',
+    '上传到云端失败：{err}': 'Upload failed: {err}',
+    '从云端下载失败：{err}': 'Download failed: {err}',
+    '云端还没有存档，请先上传': 'No cloud save yet — upload first',
+    '先保存打卡数据…': 'Saving check-in data…',
+    '保存并上传成功': 'Check-in data saved and uploaded to cloud',
+    '拉取最新版': '⬇ Pull latest',
+    'app_pulled_ok': 'Latest check-in page pulled; applies next time you open a project (page version is local only)',
+    'kicked_title': 'Signed in on another device',
+    'kicked_body': 'To prevent save conflicts, this device has been signed out. Your local draft is kept — sign in again and choose Download to restore the latest cloud save.',
+    'kicked_confirm': 'OK, sign in',
+    'checking_session': 'Checking sign-in status…'
+  };
+  for(var k in Z) ZH[k]=Z[k];
+  for(var k in E) EN[k]=E[k];
+})();
+/* ===== 离线版文案再覆盖：去掉所有「云端」表述，改为本地浏览器 ===== */
+(function(){
+  var Z2={
+    'GML 练习记录 · 项目存档管理器':'GML 练习记录 · 本地存档',
+    '一个网页，多个互不干扰的项目文件；网页的每次自动保存都由这里接管':'一个网页，多个互不干扰的项目；自动保存存到当前浏览器',
+    '· {n} 个存档文件 · 数据只存在文件夹里':'· {n} 个项目 · 保存在本浏览器',
+    '· {n} 个项目 · 存于云端':'· {n} 个项目 · 保存在本浏览器',
+    'foot_note':'删除的项目会移入回收站，可随时恢复；数据保存在当前浏览器。',
+    '已自动保存 · {t}':'已自动保存 · {t}',
+    '尚未选择存档文件夹':'还没有项目',
+    '查看 / 更换保存位置':'存储说明',
+    'fsloc_saved':'<b>存档位置</b>　当前浏览器的本地存储（localStorage）<br><b>说明</b>　项目与回收站只保存在这台设备的这个浏览器里，不会上传；清除浏览器数据会一并清除存档，请定期用「导出全部」备份。',
+    'app_intro':'<b>管理页是独立的程序，打卡网页可单独更新版本。</b>点「拉取最新版」会从来源重新下载网页并存到本浏览器缓存，之后所有项目都用这份缓存。存档数据仍只保存在本浏览器。'
+  };
+  var E2={
+    'GML Practice Log · Cloud':'GML Practice Log · Local',
+    'GML Practice Log · Project Manager':'GML Practice Log · Local',
+    '· {n} project{s} · stored in the cloud':'· {n} project{s} · saved in this browser',
+    'foot_note':'Deleted projects move to the Trash and can be restored anytime; data is saved in this browser.',
+    '尚未选择存档文件夹':'No projects yet',
+    '查看 / 更换保存位置':'Storage info',
+    'fsloc_saved':'<b>Save location</b>　This browser local storage (localStorage)<br><b>Note</b>　Projects and Trash are saved only in this browser on this device, never uploaded. Clearing browser data removes saves — use "Export all" to back up regularly.',
+    'app_intro':'<b>The manager is a standalone program; the check-in page can be updated on its own.</b> Click "Pull latest" to download the page from its source into this browser cache. Save data stays only in this browser.'
+  };
+  for(var k in Z2){ ZH[k]=Z2[k]; if(EN[k]&&EN[k].indexOf('GML')>=0){} }
+  for(var k in E2) EN[k]=E2[k];
+  /* 标题/副标题的 data-i18n 已由 applyUiLang 用上面的字典更新 */
+})();
+
+/* ---------- 云存储抽象层 ---------- */
+var CK_ENV = '__gml_pm_cloud_env__';
+var FIXED_ENV = 'gml-practice-d8gw2hcmg588bad7f'; /* 内置腾讯云环境 ID：固定，无需手动填写 */
+var CK_SESSION = '__gml_pm_session__';      /* 当前登录的官方 uid（vault 文档 ID） */
+var CK_EMAIL = '__gml_pm_email__';          /* 当前登录邮箱（用于展示） */
+var CK_TOKEN = '__gml_pm_sess_token__';     /* 本设备会话令牌（单端登录：与云端最新令牌比对） */
+var CK_DEMO_ACC = '__gml_demo_accounts__';
+var SESS_FIELD = 'sessToken';               /* 会话影子文档中的令牌字段名 */
+var SESS_OWNER = 'sessOwner';               /* 会话影子文档的归属用户名字段 */
+var COLL_ACC = 'gml_accounts';
+var COLL_VAULT = 'gml_vaults';
+var SDK_URL = 'https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js';
+/* 腾讯云官方 Web SDK v3 所需的 Publishable Key（公开的前端凭据，非密钥，可内置） */
+var FIXED_PUBKEY = 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImVjYjMzZWYwLTlmMGEtNGMyZi1iZjRhLWU3ZTIwOWUxMWYxNCJ9.eyJpc3MiOiJodHRwczovL2dtbC1wcmFjdGljZS1kOGd3MmhjbWc1ODhiYWQ3Zi5hcC1zaGFuZ2hhaS50Y2ItYXBpLnRlbmNlbnRjbG91ZGFwaS5jb20iLCJzdWIiOiJhbm9uIiwiYXVkIjoiZ21sLXByYWN0aWNlLWQ4Z3cyaGNtZzU4OGJhZDdmIiwiZXhwIjo0MDk4ODU1OTk1LCJpYXQiOjE3OTUxNzI3OTUsIm5vbmNlIjoiQTRicXNiNFNRUC0wdVp4RC1xVkZWQSIsImF0X2hhc2giOiJBNGJxc2I0U1FQLTB1WnhELXFWRlZBIiwibmFtZSI6IkFub255bW91cyIsInNjb3BlIjoiYW5vbnltb3VzIiwicHJvamVjdF9pZCI6ImdtbC1wcmFjdGljZS1kOGd3MmhjbWc1ODhiYWQ3ZiIsIm1ldGEiOnsicGxhdGZvcm0iOiJQdWJsaXNoYWJsZUtleSJ9LCJyb2xlIjoiYW5vbiIsImlzX2Fub255bW91cyI6dHJ1ZSwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiYW5vbnltb3VzIiwicHJvdmlkZXJzIjpbImFub255bW91cyJdfSwidXNlcl9tZXRhZGF0YSI6eyJuYW1lIjoiQW5vbnltb3VzIn0sInVzZXJfdHlwZSI6IiIsImNsaWVudF90eXBlIjoiY2xpZW50X3VzZXIiLCJpc19zeXN0ZW1fYWRtaW4iOmZhbHNlfQ.nrxCQJ87-sVP-ndc-pEFWjmT4pjO-zz7mgrr5Muiz11DljiZOORXJzvbmdoP_3_Xg4ilMOYVDVh1EP5YPfbEe2yB0wnopXHMcaaaT_uMjwsExALfjnsPoL_WSPOmB2LqNPRpr3HmvyRcuKvYExN1DNQkiFGADN0OzjzN_qK7ntcMjc4D3NJEF_EZ054f-5grMv4CZwGA7vu2N5lUaQ_l3UCmZp3L6Zm0V4gvNilVVJD3ECzL4zaabV6utLMexehJnND25alnjTQPO6no7s6sTL0v-cNZHVrw1yj9gLYNW_WWjCgNmAmL0j2qDkK2n1eC47wpg-vUHewcGQOUV5E-Iw';
+var CLOUD_REGION = 'ap-shanghai';
+
+var CLOUD = {
+  env:'', mode:'demo', app:null, db:null, user:null, sdkLoading:null, connected:false,
+  loadCfg:function(){
+    /* 离线版：强制 demo 模式，存档只存本浏览器 localStorage，不加载云 SDK。
+       固定本地账号 'local'，让草稿键稳定，刷新/重开都能恢复。 */
+    this.env = '';
+    this.mode = 'demo';
+    this.app=null; this.db=null; this.connected=true;
+    try{ localStorage.setItem(CK_SESSION, 'local'); }catch(e){}
+  },
+  saveEnv:function(v){
+    /* 云存储设置不再允许修改/清空环境 ID，始终锁定内置 ID */
+    this.env = FIXED_ENV;
+    try{ localStorage.setItem(CK_ENV, FIXED_ENV); }catch(e){}
+    this.mode = 'tencent';
+    this.app=null; this.db=null; this.connected=false; this.sdkLoading=null;
+  },
+  session:function(){ try{ return localStorage.getItem(CK_SESSION)||''; }catch(e){ return ''; } },
+  email:function(){ try{ return localStorage.getItem(CK_EMAIL)||''; }catch(e){ return ''; } },
+  setSession:function(uid, email){
+    try{
+      if(uid){ localStorage.setItem(CK_SESSION,uid); if(email) localStorage.setItem(CK_EMAIL,email); }
+      else{ localStorage.removeItem(CK_SESSION); localStorage.removeItem(CK_EMAIL); }
+    }catch(e){}
+    this.user = uid ? {username: email||uid, uid:uid} : null;
+  },
+  initSdk:function(){
+    var self=this;
+    if(self.app && self.db){ self.connected=true; return Promise.resolve(true); }
+    if(self.sdkLoading) return self.sdkLoading;
+    self.sdkLoading = new Promise(function(resolve,reject){
+      function setup(){
+        try{
+          /* 官方 Web SDK v3：必须传 accessKey(Publishable Key) + region + auth 选项。
+             样例来自腾讯云官方 auth-web-cloudbase cookbook。 */
+          self.app = window.cloudbase.init({
+            env: self.env,
+            region: CLOUD_REGION,
+            accessKey: FIXED_PUBKEY,
+            auth: { detectSessionInUrl: true }
+          });
+          self.db = self.app.database();
+          self.auth = (typeof self.app.auth==='function') ? self.app.auth() : self.app.auth;
+          /* 数据库读写需要一个会话。使用匿名登录拿到门控会话；
+             账号隔离由应用层用户名（doc ID）负责，不依赖官方账号体系。 */
+          var ensureSession = function(){
+            var p = (typeof self.auth.getSession==='function') ? self.auth.getSession() : Promise.resolve(null);
+            return Promise.resolve(p).then(function(res){
+              var ok = res && res.data && res.data.session;
+              if(ok){ self.connected=true; return true; }
+              /* 无会话则匿名登录一次（持久化，跨刷新复用） */
+              return Promise.resolve(self.auth.signInAnonymously({})).then(function(a){
+                self.connected=true;
+                return true;
+              }).catch(function(){ self.connected=true; return true; }); /* 集合权限可能允许无会话读，放行让后续 CRUD 自己报 */
+            }).catch(function(){ self.connected=true; return true; });
+          };
+          ensureSession(); resolve(true);
+        }catch(e){ self.sdkLoading=null; reject(e); }
+      }
+      if(window.cloudbase){ setup(); return; }
+      var s=document.createElement('script');
+      s.src=SDK_URL; s.async=true;
+      s.onload=setup;
+      s.onerror=function(){ self.sdkLoading=null; reject(new Error('CloudBase SDK 加载失败')); };
+      document.head.appendChild(s);
+    });
+    return self.sdkLoading;
+  },
+  /* 取当前官方登录用户的稳定 uid（邮箱登录跨设备一致）。
+     v3 用 getSession()：未登录时 data.session 为 null，不能只看 uid。 */
+  currentUid:function(){
+    var self=this;
+    if(!self.auth) return Promise.resolve(null);
+    var pick=function(res){
+      var d=(res&&res.data)||{};
+      var u=d.user || d.session && d.session.user || null;
+      var s=d.session;
+      if(!u && !s) return null;  /* accessKey-only 会话不算真实登录 */
+      return (u && (u.uid||u.id||u.sub)) || (s && (s.uid||s.sub)) || null;
+    };
+    var p = (typeof self.auth.getSession==='function')
+      ? self.auth.getSession() : self.auth.getUser();
+    return Promise.resolve(p).then(pick).catch(function(){ return null; });
+  }
+};
+
+/* ---------- 密码哈希（加盐，跨环境一致的纯 JS SHA-256 风格） ---------- */
+function hashPass(pw, salt){
+  /* 使用 AES 无关的简单但确定的哈希：FNV-1a + 扩散，配合随机 salt。
+     说明：这是客户端保护，防止明文存储；真实安全应由云端访问规则承担。 */
+  var raw = salt + '|' + pw;
+  var h1=0x811c9dc5, h2=0x01000193, h3=0x9e3779b9;
+  for(var i=0;i<raw.length;i++){
+    var c=raw.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 0x01000193);
+    h2 = Math.imul(h2 + c + (h1>>>7), 0x85ebca6b);
+    h3 = Math.imul(h3 ^ (h2>>>13), 0xc2b2ae35);
+  }
+  function hex(x){ return ('00000000'+(x>>>0).toString(16)).slice(-8); }
+  return 'v1$'+hex(h1)+hex(h2)+hex(h3);
+}
+function makeSalt(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,10); }
+
+/* ---------- demo 模式：用 localStorage 模拟云端账号与 vault ---------- */
+function demoAccounts(){ try{ return JSON.parse(localStorage.getItem(CK_DEMO_ACC)||'{}'); }catch(e){ return {}; } }
+function saveDemoAccounts(a){ localStorage.setItem(CK_DEMO_ACC, JSON.stringify(a)); }
+function demoVaultKey(u){ return '__gml_demo_vault_'+encodeURIComponent(u)+'__'; }
+
+/* ---------- 账号读写（双驱动） ---------- */
+async function cloudAccountGet(username){
+  if(CLOUD.mode==='demo'){
+    var a=demoAccounts(); return a[username] || null;
+  }
+  await CLOUD.initSdk();
+  try{
+    var r = await CLOUD.db.collection(COLL_ACC).doc(username).get();
+    var d = r && r.data;
+    if(Array.isArray(d)) d = d[0];           /* 真实 SDK doc().get() 返回数组 */
+    if(r && r.error) return null;
+    return d || null;
+  }catch(e){ return null; } /* 文档不存在 → 账号不存在 */
+}
+async function cloudAccountPut(username, rec){
+  if(CLOUD.mode==='demo'){
+    var a=demoAccounts(); a[username]=rec; saveDemoAccounts(a); return;
+  }
+  await CLOUD.initSdk();
+  /* doc().set() 不存在则创建；存在则覆盖 */
+  await CLOUD.db.collection(COLL_ACC).doc(username).set(rec);
+}
+
+/* =========================================================================
+   单端登录（会话令牌）
+   -------------------------------------------------------------------------
+   目标：同一账号在设备 B 登录，就把设备 A 踢下线，避免多端各自持有会话
+   而互相覆盖存档。CloudBase 权限为「仅创建人可写」，匿名 openid 跨设备
+   不同，因此不能 update 别人的文档 —— 采用与存档相同的影子文档模式：
+     · 每次登录用 add() 写一条新的会话文档（本设备拥有写权限）
+     · 字段：sessOwner=用户名, sessToken=本次随机令牌, loginAt=时间戳
+     · 读取时 where(sessOwner).orderBy(loginAt desc).limit(1) 取最新令牌
+   校验：本地令牌 == 云端最新令牌 → 有效；否则 → 被踢。
+   平滑升级：本地无令牌但云端有 → 采纳云端最新（视为本次打开即最新登录），
+   不误踢自己。demo 模式跳过云端校验。
+   ========================================================================= */
+function newSessToken(){
+  try{
+    var a=new Uint8Array(16); (window.crypto||window.msCrypto).getRandomValues(a);
+    var s=''; for(var i=0;i<a.length;i++) s+=('0'+a[i].toString(16)).slice(-2);
+    return s;
+  }catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2); }
+}
+function getLocalToken(){ try{ return localStorage.getItem(CK_TOKEN)||''; }catch(e){ return ''; } }
+function setLocalToken(t){ try{ if(t) localStorage.setItem(CK_TOKEN,t); else localStorage.removeItem(CK_TOKEN); }catch(e){} }
+
+/* 本次登录：生成新令牌 → add 一条会话影子文档 → 保存到本地。
+   之后其它设备登录会 add 更新的文档，令本设备令牌失效。 */
+async function issueSessionToken(username){
+  if(!username) return;
+  var tok = newSessToken();
+  setLocalToken(tok);
+  if(CLOUD.mode==='demo'){ return tok; }
+  try{
+    await CLOUD.initSdk();
+    var rec={}; rec[SESS_OWNER]=username; rec[SESS_FIELD]=tok; rec.loginAt=Date.now();
+    rec._id='sess_'+username+'_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+    await CLOUD.db.collection(COLL_ACC).add(rec);
+  }catch(e){ /* 写入失败不阻断登录；校验时会按云端最新处理 */ }
+  return tok;
+}
+
+/* 读取云端最新会话令牌；返回 '' 表示云端无会话记录 */
+async function cloudLatestToken(username){
+  if(!username) return '';
+  if(CLOUD.mode==='demo') return getLocalToken();
+  await CLOUD.initSdk();
+  try{
+    var whereObj={}; whereObj[SESS_OWNER]=username;
+    var q=await CLOUD.db.collection(COLL_ACC)
+      .where(whereObj).orderBy('loginAt','desc').limit(1).get();
+    var arr=(q && Array.isArray(q.data))?q.data:[];
+    return arr.length ? String(arr[0][SESS_FIELD]||'') : '';
+  }catch(e){ return ''; }
+}
+
+/* 校验本设备会话是否仍为最新。
+   返回：'ok' 有效 | 'kicked' 已被踢 | 'skip' 无法判定（网络/评测环境，放行） */
+async function verifySession(opts){
+  opts=opts||{};
+  var u=CLOUD.session();
+  if(!u || CLOUD.mode!=='demo' && CLOUD.mode!=='tencent') return 'ok';
+  if(CLOUD.mode==='demo') return 'ok';
+  var local=getLocalToken();
+  var remote;
+  try{ remote=await cloudLatestToken(u); }catch(e){ return 'skip'; }
+  /* 云端没有会话记录：旧账号/尚未升级，放行 */
+  if(!remote) return 'skip';
+  /* 本地没有令牌：平滑升级，采纳云端最新为本设备令牌 */
+  if(!local){ setLocalToken(remote); return 'ok'; }
+  if(local!==remote){
+    if(opts.silent) return 'kicked';
+    showKickedDialog();
+    return 'kicked';
+  }
+  return 'ok';
+}
+
+/* 被踢：清会话但保留本地草稿，弹窗提示后回到登录页 */
+var KICKED_FLAG=false;
+function showKickedDialog(){
+  if(KICKED_FLAG) return;   /* 防重复弹窗 */
+  KICKED_FLAG=true;
+  CLOUD.setSession(''); setLocalToken('');
+  vault={ saves:[], trash:[], lastOpenedId:null }; dirtyIds={}; trashDirty=false; scanCache=Object.create(null);
+  FS.mode='lost'; FS.lastScan=null;
+  var m=$('#view-manager'); if(m) m.hidden=true;
+  showAuthOverlay();
+  try{ authSwitch('login'); }catch(e){}
+  if(typeof window.alert==='function'){
+    /* 用页面内提示替代原生 alert；若不存在则用 toast */
+    try{ toast(T('kicked_title')+' · '+T('kicked_body'),'err'); }catch(e){}
+  }else{ try{ toast(T('kicked_body'),'err'); }catch(e){} }
+}
+function clearKickedFlag(){ KICKED_FLAG=false; }
+
+/* ---------- 本地草稿 + 手动上传/下载 ----------
+   打卡页的自动保存只写本地草稿（localStorage，按账号区分），刷新不丢；
+   只有点「上传存档」才把 GML-Saves/GML-Trash 上传云端，点「下载存档」才从云端取回这两个文件。 */
+var CK_DRAFT = '__gml_pm_local_draft__';
+function draftKey(){ return CK_DRAFT + '_' + (CLOUD.session()||'anon'); }
+function draftSnapshot(){
+  return { saves: vault.saves, trash: vault.trash, lastOpenedId: vault.lastOpenedId,
+    uiLang: UI.lang, appInfo: APP_INFO, updatedAt: Date.now() };
+}
+function saveLocalDraft(){
+  try{ localStorage.setItem(draftKey(), JSON.stringify(vaultSnapshot())); }
+  catch(e){ try{ localStorage.setItem(draftKey(), JSON.stringify(draftSnapshot())); }catch(e2){} }
+}
+function loadLocalDraft(){
+  try{ var raw=localStorage.getItem(draftKey()); return raw?normalizeVault(JSON.parse(raw)):null; }catch(e){ return null; }
+}
+function clearLocalDraft(){ try{ localStorage.removeItem(draftKey()); }catch(e){} }
+function setPendingUpload(v){ try{ localStorage.setItem(draftKey()+'_pending', v?'1':''); }catch(e){} }
+function hasPendingUpload(){ try{ return localStorage.getItem(draftKey()+'_pending')==='1'; }catch(e){ return false; } }
+
+async function manualUpload(){
+  if(!cloudReady()){ toast(T('请先登录云端账号'),'err'); return; }
+  var sess=await verifySession(); if(sess==='kicked') return;   /* 仅被踢才中止；skip(网络无法判定)放行，避免误伤正常上传 */
+  var btn=$('#btnUpload'); var old=btn?btn.textContent:''; if(btn) btn.disabled=true;
+  try{
+    var ids=Object.keys(dirtyIds);
+    for(var i=0;i<ids.length;i++){ var s=findSlot(ids[i]); if(s) ensureFileMeta(s); }
+    dirtyIds={};
+    await cloudVaultSave();                 /* 整体覆盖云端记录 */
+    saveLocalDraft(); setPendingUpload(false);
+    if(trashDirty) trashDirty=false;
+    FS.lastScan={ dirName:CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:Date.now(),
+      total:vault.saves.length, ok:vault.saves.length, skipped:[] };
+    renderManager(); renderTrash(); updateFsChip(); renderScanBanner();
+    toast(T('已上传到云端 · {t}',{t:hhmmss(Date.now())}),'ok');
+  }catch(e){
+    toast(T('上传到云端失败：{err}',{err:String((e&&e.message)||e)}),'err');
+  }finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+}
+
+async function manualDownload(){
+  if(!cloudReady()){ toast(T('请先登录云端账号'),'err'); return; }
+  var sess=await verifySession(); if(sess==='kicked') return;   /* 仅被踢才中止；skip(网络无法判定)放行，避免误伤正常上传 */
+  var btn=$('#btnDownload'); var old=btn?btn.textContent:''; if(btn) btn.disabled=true;
+  try{
+    var v=await cloudVaultLoad();           /* 从云端读取最新记录 */
+    if(!v){ toast(T('云端还没有存档，请先上传'),'err'); return; }
+    /* 只覆盖两个云端文件：saves(GML-Saves) 与 trash(GML-Trash)；
+       语言、网页缓存、lastOpenedId 等保留本地当前值，不随下载改变。 */
+    vault.saves=v.saves; vault.trash=v.trash;
+    if(!v.saves.some(function(s){return s.id===vault.lastOpenedId;})){
+      vault.lastOpenedId = v.saves.length?v.saves[0].id:null;
+    }
+    dirtyIds={}; trashDirty=false; scanCache=Object.create(null);
+    saveLocalDraft(); setPendingUpload(false);
+    FS.mode='file';
+    FS.lastScan={ dirName:CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:v.updatedAt||Date.now(),
+      total:v.saves.length, ok:v.saves.length, skipped:[] };
+    renderManager(); renderTrash(); updateFsChip(); renderScanBanner();
+    toast(T('已从云端下载 · {t}',{t:hhmmss(v.updatedAt||Date.now())}),'ok');
+  }catch(e){
+    toast(T('从云端下载失败：{err}',{err:String((e&&e.message)||e)}),'err');
+  }finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+}
+
+/* ---------- vault 读写（双驱动） ---------- */
+function vaultSnapshot(){
+  return {
+    saves: vault.saves, trash: vault.trash, lastOpenedId: vault.lastOpenedId,
+    uiLang: UI.lang, appInfo: APP_INFO, appHtml: APP_HTML_CUSTOM ? APP_HTML : null,
+    updatedAt: Date.now()
+  };
+}
+function normalizeVault(v){
+  v = v || {};
+  return {
+    saves: Array.isArray(v.saves)?v.saves:[],
+    trash: Array.isArray(v.trash)?v.trash:[],
+    lastOpenedId: v.lastOpenedId||null,
+    uiLang: (v.uiLang==='zh'||v.uiLang==='en')?v.uiLang:null,
+    appInfo: v.appInfo||null,
+    appHtml: v.appHtml||null,
+    updatedAt: v.updatedAt||0
+  };
+}
+async function cloudVaultLoad(){
+  var u = CLOUD.session(); if(!u) return null;
+  if(CLOUD.mode==='demo'){
+    var raw=null; try{ raw=localStorage.getItem(demoVaultKey(u)); }catch(e){}
+    return raw ? normalizeVault(JSON.parse(raw)) : null;
+  }
+  await CLOUD.initSdk();
+  var col = CLOUD.db.collection(COLL_VAULT);
+  var best=null, bestAt=-1;
+  /* 1) 主文档（历史格式：doc ID = 用户名） */
+  try{
+    var r = await col.doc(u).get();
+    var d = r && r.data; if(Array.isArray(d)) d=d[0];
+    if(d && !(r&&r.error)){ best=d; bestAt=Number(d.updatedAt)||0; }
+  }catch(e){}
+  /* 2) 影子文档（owner=用户名，按更新时间取最新；可跨匿名 openid 读取） */
+  try{
+    var q = await col.where({owner:u}).orderBy('updatedAt','desc').limit(1).get();
+    var arr = (q && Array.isArray(q.data)) ? q.data : [];
+    if(arr.length){
+      var sd=arr[0], sa=Number(sd.updatedAt)||0;
+      if(sa>=bestAt){ best=sd; bestAt=sa; }  /* 与 cloudVaultRaw 同策略：并行比较下影子优先 */
+    }
+  }catch(e){}
+  return best ? normalizeVault(best) : null;
+}
+/* 云端只保存两个「文件」：saves(GML-Saves) 与 trash(GML-Trash)。
+   语言、网页缓存、lastOpenedId 等一律留在本地草稿，不上传。 */
+function cloudSyncPayload(){
+  return { saves: vault.saves, trash: vault.trash, updatedAt: Date.now() };
+}
+/* 读取云端存档原始文档（主文档 or 最新影子文档），返回 {id,isShadow,data} */
+async function cloudVaultRaw(){
+  var u = CLOUD.session(); if(!u) return null;
+  await CLOUD.initSdk();
+  var col = CLOUD.db.collection(COLL_VAULT);
+  var best=null, bestAt=-1, bestId=null, isShadow=false;
+  try{
+    var r = await col.doc(u).get();
+    var d = r && r.data; if(Array.isArray(d)) d=d[0];
+    if(d && !(r&&r.error)){ best=d; bestAt=Number(d.updatedAt)||0; bestId=u; isShadow=false; }
+  }catch(e){}
+  try{
+    var q = await col.where({owner:u}).orderBy('updatedAt','desc').limit(1).get();
+    var arr=(q&&Array.isArray(q.data))?q.data:[];
+    if(arr.length){ var sd=arr[0], sa=Number(sd.updatedAt)||0;
+      if(sa>=bestAt){ best=sd; bestAt=sa; bestId=sd._id; isShadow=true; }  /* 时间戳相等时优先影子(通常是较新的跨会话写入) */
+    }
+  }catch(e){}
+  return best ? {id:bestId, isShadow:isShadow, data:best} : null;
+}
+
+/* 上传策略（彻底规避 CloudBase 匿名 openid 变化导致的覆盖失败）：
+   CloudBase 权限为「仅创建人可写」：doc(用户名) 若由别的会话创建，本会话 update/set/remove 均无效。
+   写入顺序：
+     1) 若最新存档是本会话影子文档 → update 它（无新垃圾）；
+     2) 否则尝试 update 主文档 doc(用户名)（updated>0 即成功）；
+     3) 主文档不存在则 set 创建（首次上传，本会话拥有）；
+     4) 若因权限/主键冲突失败 → add 一条 owner=用户名 的新影子文档（本会话拥有写权限）。
+   读取时合并主文档与最新影子文档，因此跨设备取到的一定是 updatedAt 最大的一次上传。 */
+async function cloudVaultSave(){
+  var u = CLOUD.session(); if(!u) return false;
+  var snap = cloudSyncPayload();
+  if(CLOUD.mode==='demo'){
+    localStorage.setItem(demoVaultKey(u), JSON.stringify(snap));
+  }else{
+    await CLOUD.initSdk();
+    var col = CLOUD.db.collection(COLL_VAULT);
+    var old = await cloudVaultRaw();
+    /* ★ 修复「删除项目+清空回收站后拉取到旧记录」：
+       删除会触发跨会话写入 —— 新会话无权覆盖旧主文档(doc(用户名))，于是数据落进
+       一条影子文档，云端从此「主文档=旧数据(含被删项) / 影子=新数据」分叉。
+       读取时按 updatedAt 取最新；但 updatedAt 由本地时钟(Date.now)生成，
+       设备时钟偏差/竞态会让影子的 updatedAt <= 主文档，于是读到旧主文档，
+       已删除的项目「复活」。这里把本次写入时间强制抬到严格大于云端现存最新版本，
+       保证新数据永远胜出，并对已有脏数据自愈。 */
+    if(old && old.data){
+      var prevAt=Number(old.data.updatedAt)||0;
+      if(snap.updatedAt<=prevAt) snap.updatedAt=prevAt+1;
+    }
+    var wrote=false;
+    /* 1) 最新是本会话影子文档：直接 update。
+       注意：跨匿名 openid 时 update 会返回 {updated:0}（无权改旧会话文档），
+       绝不能当成成功，否则会跳过 add 新影子文档，导致新存档根本没写入云端。
+       只有 updated>0 才是真正写入成功。 */
+    if(old && old.isShadow && old.id){
+      try{ var r1=await col.doc(old.id).update(snap); if(r1 && r1.updated>0) wrote=true; }catch(e){}
+    }
+    /* 2) 尝试 update 主文档 */
+    if(!wrote){
+      try{ var r2=await col.doc(u).update(snap); if(r2 && r2.updated>0) wrote=true; }catch(e){}
+    }
+    /* 3) 主文档不存在：set 创建（首次上传） */
+    if(!wrote){
+      try{ await col.doc(u).set(snap); wrote=true; }catch(e){}
+    }
+    /* 4) 仍失败（跨 openid 覆盖被拒）：add 新影子文档 */
+    if(!wrote){
+      var sid = u + '_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+      var shadow = {}; for(var k in snap) shadow[k]=snap[k]; shadow.owner=u; shadow._id=sid;
+      try{ await col.add(shadow); wrote=true; }catch(e){ throw e; }
+    }
+  }
+  FS.lastScan = { dirName: CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:snap.updatedAt,
+    total:snap.saves.length, ok:snap.saves.length, skipped:[] };
+  return true;
+}
+
+/* ---------- 账号操作（自建账号：用户名 + 加盐密码哈希，存云数据库） ----------
+   不依赖官方账号体系，不需要邮箱/手机/验证码。
+   账号文档：gml_accounts，doc ID = 用户名；存档文档：gml_vaults，doc ID = 用户名。
+   数据库会话由匿名登录提供（见 initSdk），账号隔离由用户名 doc ID 负责。 */
+function validUsername(u){ return /^[A-Za-z0-9_-]{2,32}$/.test(String(u||'').trim()); }
+function validPass(p){ p=String(p||''); return p.length>=4; }
+
+/* 注册：用户名 + 密码。用户名唯一，密码加盐哈希后存云端。 */
+async function cloudRegister(username, password){
+  username = String(username||'').trim();
+  if(!validUsername(username)) throw new Error(T('用户名只能包含字母、数字、下划线和短横线（2-32 位）'));
+  if(!validPass(password)) throw new Error(T('密码至少 4 位'));
+  await CLOUD.initSdk();
+  if(await cloudAccountGet(username)) throw new Error(T('用户名已存在，请直接登录'));
+  var salt=makeSalt();
+  await cloudAccountPut(username, { username:username, passHash:hashPass(password,salt), salt:salt, createdAt:Date.now() });
+  CLOUD.setSession(username, username);
+  vault={ saves:[], trash:[], lastOpenedId:null };
+  clearLocalDraft(); setPendingUpload(false);
+  return true;
+}
+
+/* 登录：用户名 + 密码，校验云端加盐哈希。 */
+async function cloudLogin(username, password){
+  username = String(username||'').trim();
+  if(!validUsername(username)) throw new Error(T('用户名只能包含字母、数字、下划线和短横线（2-32 位）'));
+  await CLOUD.initSdk();
+  var rec = await cloudAccountGet(username);
+  if(!rec || rec.passHash !== hashPass(String(password||''), rec.salt)) throw new Error(T('账号或密码错误'));
+  CLOUD.setSession(username, username);
+  return true;
+}
+
+function cloudLogout(){
+  /* 不调用官方 signOut：匿名会话只是数据库门控，退出仅清应用层登录态。
+     账号隔离由用户名 doc ID 负责，与官方登录态无关。 */
+  CLOUD.setSession(''); setLocalToken(''); clearKickedFlag();
+  vault={ saves:[], trash:[], lastOpenedId:null }; dirtyIds={}; trashDirty=false; scanCache=Object.create(null);
+  FS.mode='lost'; FS.lastScan=null;
+  showAuthOverlay();
+  try{ authSwitch('login'); }catch(e){}
+}
+
+/* ---------- 覆盖存储边界函数：本地文件夹 → 云端 ---------- */
+function cloudReady(){ return !!CLOUD.session(); }
+
+async function fsUsable(){ return cloudReady(); }
+async function requireFolder(){ if(!cloudReady()){ showAuthOverlay(); return false; } return true; }
+
+async function persistNow(){
+  if(!cloudReady()) return false;
+  try{
+    var ids=Object.keys(dirtyIds);
+    for(var i=0;i<ids.length;i++){ var s=findSlot(ids[i]); if(s) ensureFileMeta(s); }
+    dirtyIds={};
+    saveLocalDraft();                       /* 只写本地草稿，不写云端 */
+    setPendingUpload(true);
+    if(trashDirty) trashDirty=false;
+  }catch(e){
+    toast(T('保存到本地草稿失败：{err}',{err:String((e&&e.message)||e)}),'err');
+    return false;
+  }
+  renderManager(); renderTrash(); updateFsChip(); renderScanBanner();
+  return true;
+}
+
+async function rescan(opts){
+  opts=opts||{};
+  if(!cloudReady()){ renderManager(); return null; }
+  try{
+    var v = loadLocalDraft();
+    if(v){
+      vault.saves=v.saves; vault.trash=v.trash;
+      if(!v.saves.some(function(s){return s.id===vault.lastOpenedId;})) vault.lastOpenedId = v.saves.length?v.saves[0].id:null;
+      FS.lastScan={ dirName:CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:v.updatedAt||Date.now(),
+        total:v.saves.length, ok:v.saves.length, skipped:[] };
+      if(v.uiLang && !UI.userSet && v.uiLang!==UI.lang){ UI.lang=v.uiLang; applyUiLang(); }
+      if(v.appInfo){ APP_INFO=v.appInfo; renderAppCard(); }
+    }
+    renderManager(); renderTrash(); updateFsChip();
+    return FS.lastScan;
+  }catch(e){
+    if(opts.toast) toast(T('从云端加载失败：{err}',{err:String((e&&e.message)||e)}),'err');
+    return null;
+  }
+}
+
+/* 回收站：vault 整体存云，单文件操作变为 no-op */
+async function writeTrashFile(){ return true; }
+async function removeTrashFile(){ return true; }
+async function removeSlotFile(){ return true; }
+async function fsWriteSlot(){ return true; }
+async function fsWriteIndex(){ return true; }
+async function fsWriteTrashIndex(){ return true; }
+async function readSlotDataFromDisk(slot){ return (slot&&slot.data)?clone(slot.data):{}; }
+
+/* 语言偏好写入云端 vault */
+async function readUiLang(){
+  var v = loadLocalDraft();
+  return (v && v.uiLang) ? v.uiLang : null;
+}
+async function setUiLang(l, fromUser){
+  if(l!=='zh' && l!=='en') return;
+  if(fromUser) UI.userSet=true;
+  UI.lang=l; applyUiLang();
+  /* 登录弹窗的动态部分（标题/切换链接/按钮）按新语言重绘 */
+  try{ authSwitch(AUTH_MODE); }catch(e){}
+  if(fromUser && frame && frame.contentWindow){
+    try{ frame.contentWindow.postMessage({__gml_pm:true,dir:'to-app',type:'ui-lang',lang:l},'*'); }catch(e){}
+    try{ await rpc('cmd',{name:'lang',args:{lang:l}},8000); }catch(e){}
+  }
+  if(cloudReady()){ try{ saveLocalDraft(); setPendingUpload(true); renderScanBanner(); }catch(e){} }
+}
+
+/* 打卡网页缓存：存到云端账号空间（appInfo / appHtml 随 vault 保存） */
+async function loadAppInfo(){
+  var v = loadLocalDraft();
+  if(v && v.appInfo && v.appInfo.url){
+    APP_INFO=v.appInfo;
+    if(v.appHtml && /<html[\s>]/i.test(v.appHtml)){ APP_HTML=v.appHtml; APP_HTML_CUSTOM=true; }
+  }else{
+    APP_INFO={ url:APP_DEFAULT_URL, version:'', fetchedAt:0, size:0, custom:false };
+    APP_HTML=null; APP_HTML_CUSTOM=false;
+  }
+  renderAppCard();
+}
+async function loadActiveAppHtml(){
+  APP_HTML_CUSTOM=false;
+  try{
+    var v=loadLocalDraft();
+    if(v && v.appHtml && /<html[\s>]/i.test(v.appHtml)){
+      APP_HTML=v.appHtml; APP_HTML_CUSTOM=true; return true;
+    }
+  }catch(e){}
+  APP_HTML=decodeBuiltinApp();
+  return false;
+}
+async function fetchLatestApp(btnId){
+  if(!cloudReady()){ toast(T('请先登录云端账号'),'err'); return; }
+  var url=(APP_INFO.url||'').trim();
+  if(!/^https?:\/\//i.test(url)){ openAppSource(); toast(T('app_url_invalid'),'err'); return; }
+  var btn=$(btnId?'#'+btnId:'#btnAppFetch'); var old=btn?btn.textContent:'';
+  if(btn){ btn.disabled=true; btn.textContent=T('app_fetching'); }
+  try{
+    var resp=await fetch(url,{cache:'no-store'});
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    var html=await resp.text();
+    if(!/<html[\s>]/i.test(html)) throw new Error(T('app_not_html'));
+    if(!/gml-practice-log-v2/.test(html) || !/cmd/.test(html)) throw new Error(T('app_not_html'));
+    APP_INFO={ url:url, version:appVersionOf(html), fetchedAt:Date.now(), size:html.length, custom:true };
+    APP_HTML=html; APP_HTML_CUSTOM=true;
+    saveLocalDraft(); setPendingUpload(true);
+    renderAppCard(); renderScanBanner();
+    toast(T('app_pulled_ok'),'ok');
+  }catch(e){
+    toast(T('app_fetched_fail',{err:String((e&&e.message)||e)}),'err');
+  }finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+}
+async function restoreBuiltinApp(){
+  APP_HTML=null; APP_HTML_CUSTOM=false;
+  APP_INFO={ url:APP_DEFAULT_URL, version:'', fetchedAt:0, size:0, custom:false };
+  if(cloudReady()){ try{ saveLocalDraft(); setPendingUpload(true); renderScanBanner(); }catch(e){} }
+  renderAppCard();
+  toast(T('app_reset_ok'),'ok');
+}
+
+/* 顶部状态 / 信息区 */
+function displayName(){ return CLOUD.email() || CLOUD.session() || ''; }
+function updateFsChip(){
+  var chip=$('#fsChip'), txt=$('#fsChipText'); if(!chip||!txt) return;
+  var au=$('#accountArea'); if(au) au.innerHTML=accountChipHtml();
+  if(cloudReady()){
+    chip.className='chip';
+    txt.textContent=CLOUD.mode==='demo' ? (displayName()+' · '+T('演示')) : (displayName()+' · '+T('云端'));
+  }else{
+    chip.className='chip bad';
+    txt.textContent=T('未登录');
+  }
+  var loc=$('#fsloc');
+  if(loc){
+    if(cloudReady()) loc.innerHTML=T('fsloc_saved',{name:esc(displayName()),vaults:COLL_VAULT});
+    else loc.innerHTML=T('fsloc_unsaved');
+  }
+}
+function updateStoreInfo(){
+  var el=$('#storeInfo'); if(!el) return;
+  el.textContent = cloudReady()
+    ? T('· {n} 个项目 · 存于云端',{n:vault.saves.length})
+    : T('· 未登录');
+}
+function renderScanBanner(){
+  var b=$('#scanBanner'); if(!b) return;
+  b.hidden=false;
+  var en=(typeof UI!=='undefined' && UI.lang==='en');
+  var actions='<div class="sb-actions"><button class="btn mini" id="btnPullApp">'
+    +(en?'\u2b07 Pull latest':'\u2b07 \u62c9\u53d6\u6700\u65b0\u7248')+'</button></div>';
+  var sc=FS.lastScan;
+  var head;
+  if(sc && sc.total!=null){
+    head = en ? ('\ud83d\udcbe This browser \u00b7 '+sc.total+' project'+(sc.total===1?'':'s')+' \u00b7 saved '+hhmmss(sc.at))
+              : ('\ud83d\udcbe \u672c\u6d4f\u89c8\u5668 \u00b7 '+sc.total+' \u4e2a\u9879\u76ee \u00b7 \u5df2\u81ea\u52a8\u4fdd\u5b58 '+hhmmss(sc.at));
+  }else{
+    head = en ? '\ud83d\udcbe This browser \u00b7 no projects yet, click New to start'
+              : '\ud83d\udcbe \u672c\u6d4f\u89c8\u5668 \u00b7 \u8fd8\u6ca1\u6709\u9879\u76ee\uff0c\u70b9\u300c\u65b0\u5efa\u9879\u76ee\u300d\u5f00\u59cb';
+  }
+  b.innerHTML='<div class="sb-main">'+head+'</div>'+actions;
+}
+function showSetup(){ showAuthOverlay(); }
+
+/* ---------- 全新启动流程 ---------- */
+async function boot(){
+  applyUiLang();
+  simplifyUI();
+  try{ localStorage.removeItem('__gml_pm_vault_v2__'); localStorage.removeItem('__gml_pm_vault_v1__'); }catch(e){}
+  CLOUD.loadCfg();
+  var u=CLOUD.session();
+  CLOUD.user = u?{username:u}:null;
+  wireCloudUI();
+  if(u){
+    FS.mode='file';
+    var ok=true;
+    try{ var v=loadLocalDraft();
+      if(v){ vault.saves=v.saves; vault.trash=v.trash; vault.lastOpenedId=v.lastOpenedId;
+        if(v.uiLang && !UI.userSet){ UI.lang=v.uiLang; }
+        if(v.appInfo){ APP_INFO=v.appInfo; }
+        if(v.appHtml && /<html[\s>]/i.test(v.appHtml)){ APP_HTML=v.appHtml; APP_HTML_CUSTOM=true; }
+      }
+      if(CLOUD.mode==='tencent'){ await CLOUD.initSdk(); }
+    }catch(e){ ok=false; toast(T('从云端加载失败：{err}',{err:String((e&&e.message)||e)}),'err'); }
+    /* 单端登录校验：若本设备令牌非云端最新 → 被踢，回到登录页 */
+    var sv=await verifySession();
+    if(sv==='kicked'){ return; }
+    applyUiLang();
+    FS.lastScan={ dirName:CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:Date.now(),
+      total:vault.saves.length, ok:vault.saves.length, skipped:[] };
+    showManagerView();
+    renderManager(); renderTrash(); updateFsChip(); renderAppCard();
+  }else{
+    FS.mode='lost';
+    showAuthOverlay();
+  }
+}
+
+/* ---------- 账号 UI ---------- */
+function accountChipHtml(){
+  if(!cloudReady()) return '';
+  var label=displayName();
+  return '<span class="acc-name" title="'+esc(label)+'">👤 '+esc(label)+'</span>'
+    +'<button class="btn mini" id="btnLogout" title="'+T('退出登录')+'">'+T('退出登录')+'</button>';
+}
+function showAuthOverlay(){
+  var o=$('#authOverlay'); if(o) o.hidden=false;
+}
+function hideAuthOverlay(){
+  var o=$('#authOverlay'); if(o) o.hidden=true;
+}
+function showManagerView(){
+  hideAuthOverlay();
+  var m=$('#view-manager'); if(m) m.hidden=false;
+}
+var AUTH_MODE='login';
+function authSwitch(mode){
+  AUTH_MODE = (mode==='reg') ? 'reg' : 'login';
+  var isLogin = AUTH_MODE==='login';
+  var t=$('#authTitle'), sub=$('#authSub'), sw=$('#authSwitch');
+  if(t) t.textContent=T(isLogin?'登录到云端':'注册新账号');
+  if(sub) sub.textContent=T('auth_sub');
+  if(sw) sw.innerHTML = isLogin
+    ? T('还没有账号？注册')+' <a href="#" id="authGoReg">'+T('注册')+'</a>'
+    : T('已有账号？登录')+' <a href="#" id="authGoLogin">'+T('登录')+'</a>';
+  var btn=$('#authSubmit'); if(btn) btn.textContent=T(isLogin?'登录':'注册');
+  var pu=$('#authUser'), pp=$('#authPass');
+  if(pu) pu.placeholder=T('请输入用户名');
+  if(pp) pp.placeholder=T('请输入密码（至少 4 位）');
+  /* 验证码行不再使用 */
+  var row=$('#authCodeRow'); if(row) row.style.display = 'none';
+  var goR=$('#authGoReg'); if(goR) goR.onclick=function(e){ e.preventDefault(); authSwitch('reg'); };
+  var goL=$('#authGoLogin'); if(goL) goL.onclick=function(e){ e.preventDefault(); authSwitch('login'); };
+}
+function wireCloudUI(){
+  /* 登录/注册提交 */
+  var form=$('#authForm');
+  if(form && !form._wired){
+    form._wired=true;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var u=($('#authUser').value||'').trim(), p=$('#authPass').value||'';
+      var btn=$('#authSubmit'); var old=btn.textContent; btn.disabled=true;
+      try{
+        var isReg = $('#authTitle').textContent === T('注册新账号');
+        if(isReg) await cloudRegister(u,p); else await cloudLogin(u,p);
+        clearKickedFlag();
+        await issueSessionToken(u);   /* 单端登录：本次登录签发新令牌，踢掉其它设备 */
+        CLOUD.user={username:u};
+        FS.mode='file';
+        var v=loadLocalDraft();
+        if(v){ vault.saves=v.saves; vault.trash=v.trash; vault.lastOpenedId=v.lastOpenedId;
+          if(v.uiLang&&!UI.userSet){ UI.lang=v.uiLang; UI.userSet=true; }
+          if(v.appInfo){ APP_INFO=v.appInfo; }
+          if(v.appHtml&&/<html[\s>]/i.test(v.appHtml)){ APP_HTML=v.appHtml; APP_HTML_CUSTOM=true; }
+        }
+        dirtyIds={}; trashDirty=false; scanCache=Object.create(null);
+        applyUiLang();
+        FS.lastScan={ dirName:CLOUD.mode==='demo'?T('演示'):T('云端'), dirPath:'', at:Date.now(),
+          total:vault.saves.length, ok:vault.saves.length, skipped:[] };
+        hideAuthOverlay(); showManagerView();
+        renderManager(); renderTrash(); updateFsChip(); renderAppCard();
+        toast(T(isReg?'注册成功':'登录成功'),'ok');
+        $('#authPass').value='';
+      }catch(err){
+        toast(String((err&&err.message)||err),'err');
+      }finally{ btn.disabled=false; btn.textContent=old; }
+    });
+  }
+  authSwitch('login');
+
+  /* 单端登录：定时 + 窗口重新聚焦时静默校验（仅登录态、页面可见时） */
+  if(!window.__gml_sess_watch){
+    window.__gml_sess_watch=true;
+    setInterval(function(){
+      if(!cloudReady() || document.hidden || KICKED_FLAG) return;
+      try{ verifySession(); }catch(e){}
+    }, 60000);
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden || !cloudReady() || KICKED_FLAG) return;
+      try{ verifySession(); }catch(e){}
+    });
+  }
+
+  /* 账号栏：登出 / 云设置（事件委托，节点会重建） */
+  document.addEventListener('click', function(e){
+    var t=e.target;
+    if(t && t.closest && t.closest('#btnLogout')){ cloudLogout(); return; }
+  });
+  var chip=$('#fsChip');
+  if(chip && !chip._wired){ chip._wired=true; chip.addEventListener('click', openCloudSettings); }
+
+  /* 云设置弹层 */
+  var cOk=$('#cloudOk'), cCancel=$('#cloudCancel'), cClear=$('#cloudClear');
+  if(cOk && !cOk._wired){
+    cOk._wired=true;
+    cOk.addEventListener('click', async function(){
+      var btn=this; var old=btn.textContent; btn.disabled=true; btn.textContent=T('验证中…');
+      try{
+        CLOUD.saveEnv(FIXED_ENV);
+        await CLOUD.initSdk();
+        toast(T('连接成功'),'ok');
+        $('#cloudOverlay').hidden=true;
+        updateFsChip();
+        renderManager(); renderScanBanner();
+      }catch(err){
+        toast(T('连接失败：{err}',{err:String((err&&err.message)||err)}),'err');
+      }finally{ btn.disabled=false; btn.textContent=old; }
+    });
+  }
+  if(cCancel && !cCancel._wired){ cCancel._wired=true; cCancel.addEventListener('click',function(){ $('#cloudOverlay').hidden=true; }); }
+  if(cClear){ cClear.style.display='none'; }
+  var cov=$('#cloudOverlay');
+  if(cov && !cov._wired){ cov._wired=true; cov.addEventListener('click',function(e){ if(e.target===this) this.hidden=true; }); }
+
+  /* 手动存档按钮（扫描横幅动态渲染，事件委托） */
+  document.addEventListener('click', function(e){
+    var t=e.target; if(!t||!t.closest) return;
+    if(t.closest('#btnUpload')){ manualUpload(); return; }
+    if(t.closest('#btnDownload')){ manualDownload(); return; }
+    if(t.closest('#btnQuickUpload')){ quickUploadFromProject(); return; }
+    if(t.closest('#btnPullApp')){ fetchLatestApp('btnPullApp'); return; }
+  });
+}
+
+/* 打卡记录页「⬆ 上传存档」：先把当前打卡数据落盘到草稿，再上传云端。 */
+async function quickUploadFromProject(){
+  if(!cloudReady()){ toast(T('请先登录云端账号'),'err'); return; }
+  var btn=$('#btnQuickUpload'); var old=btn?btn.textContent:''; if(btn){ btn.disabled=true; btn.textContent=T('先保存打卡数据…'); }
+  try{
+    try{ await rpc('flush',{},4000); }catch(e){}
+    if(typeof persistNow==='function'){ await persistNow(); }
+    await manualUpload();
+  }catch(e){
+    toast(T('上传到云端失败：{err}',{err:String((e&&e.message)||e)}),'err');
+  }finally{ if(btn){ btn.disabled=false; btn.textContent=old; } }
+}
+
+/* 界面精简：隐藏环境ID/版本号/说明区，顶栏只留核心操作；
+   在打卡记录页注入「⬆ 上传存档」按钮（保存后一键上传）。 */
+function simplifyUI(){
+  if(window.__gml_pm_simplified) return;
+  window.__gml_pm_simplified=true;
+  var css=document.createElement('style');
+  css.textContent=[
+    /* 隐藏环境ID/存储位置说明整块 */
+    '#fsloc,.intro,.appcard,.foot{display:none !important;}',
+    /* 顶栏副标题、版本号、保存位置chip、云设置入口 */
+    '.brand-txt p{display:none !important;}',
+    '.ver-badge{display:none !important;}',
+    '#fsChip,.auth-cloudlink{display:none !important;}',
+    /* 主机名可能带环境信息，标题精简为固定文案 */
+    '.project-bar .hide-sm{display:none !important;}'
+  ].join(' ');
+  document.head.appendChild(css);
+
+  /* 标题简化：去掉版本号副标题元素残留文本 */
+  var h1=document.querySelector('#view-manager .brand-txt h1');
+  if(h1){ /* 保留 data-i18n 由 applyUiLang 处理 */ }
+
+  /* 项目页工具条加「上传存档」按钮（放在 立即保存 之后） */
+  var bar=document.querySelector('#view-project .project-bar');
+  if(bar && !document.querySelector('#btnQuickUpload')){
+    var b=document.createElement('button');
+    b.className='btn primary'; b.id='btnQuickUpload';
+    b.textContent=T('上传存档');
+    var saveBtn=document.querySelector('#btnSaveNow');
+    if(saveBtn && saveBtn.nextSibling){ bar.insertBefore(b, saveBtn.nextSibling); }
+    else bar.appendChild(b);
+  }
+}
+function openCloudSettings(){
+  var inp=$('#cloudEnv'); if(inp){ inp.value=FIXED_ENV; inp.readOnly=true; }
+  var mode=$('#cloudMode'); if(mode) mode.textContent = CLOUD.mode==='demo'?T('演示模式'):T('腾讯云模式');
+  var note=$('#cloudNote'); if(note) note.textContent=T('环境 ID 与访问密钥已内置。请确保控制台已放行当前域名，并创建集合 gml_accounts 与 gml_vaults。');
+  var o=$('#cloudOverlay'); if(o) o.hidden=false;
+}
+
+/* ===== 离线版补充样式：彻底隐藏登录与云相关 UI ===== */
+(function(){
+  var st=document.createElement('style'); st.id='gml-offline-style';
+  st.textContent=[
+    '#authOverlay{display:none !important}',
+    '#btnUpload,#btnDownload,#btnQuickUpload{display:none !important}',
+    '#fsChip,.account-area,#cloudOverlay{display:none !important}',
+    '.auth-cloudlink,#btnLogout{display:none !important}'
+  ].join(' ');
+  document.head.appendChild(st);
+})();
 boot();
 })();
 </script>
